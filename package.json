@@ -2,7 +2,7 @@
   "name": "shell-candy",
   "version": "0.1.0",
   "description": "A tool with which one might generate colour themes for text-based applications",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "repository": "git@github.com:dnch/shell-candy.git",
   "author": "Dan Cheail <dan@dnch.xyz>",
   "license": "MIT",
@@ -24,6 +24,11 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "watch": "tsc --watch",
+    "build": "tsc"
+  },
+  "bin": {
+    "shell-candy": "./bin/shell-candy"
   }
 }

@@ -1,8 +1,11 @@
 module.exports = {
   root: true,
-  extends: "dnch/typescript",
+  plugins: ["jest"],
+  extends: ["dnch/typescript", "plugin:jest/recommended"],
+  ignorePatterns: ["*.js"],
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: "./tsconfig.json",
+
   },
 };

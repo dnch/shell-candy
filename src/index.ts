@@ -158,20 +158,34 @@ Handlebars.registerHelper("rSubSegment", () => new Handlebars.SafeString(
   String.fromCodePoint(Powerline.CodePoints.RightSubSegment)
 ));
 
-const colorChipTemplate = Handlebars.compile(
+Handlebars.registerPartial("colorChip", "{{#fg chip.color}}{{rSegment}}{{block chip.size}}{{lSegment}}{{/fg}}");
+Handlebars.registerPartial("labelledColorChip",
   `{{#fg chip.color ~}}
-    {{rSegment}}{{block 5}}
-    {{~#bg chip.color}}
-      {{~#fg "#ffF" }} {{chip.name}} {{/fg}}
-    {{~/bg}}
-    {{~block 5}}{{lSegment}} {{chip.name}}
-  {{~/fg}}`
-);
+     {{rSegment}}{{block 5}}
+     {{~#bg chip.color}}{{#fg chip.labelColor }}{{chip.label}}{{/fg}}{{/bg~}}
+     {{block 5}}{{lSegment}}
+   {{~/fg}}`);
+
+const demo = Handlebars.compile("{{>labelledColorChip}} {{ chip.label }}");
 
 tonesTheme.bases.forEach((base: Base) => {
-  log(colorChipTemplate({ chip: base }));
+  log(demo({
+    chip: {
+      color: base.color,
+      labelColor: "#fff",
+      label: base.name,
+      size: 20,
+    }
+  }));
 });
 
 neutralTheme.bases.forEach((base: Base) => {
-  log(colorChipTemplate({ chip: base }));
+  log(demo({
+    chip: {
+      color: base.color,
+      labelColor: "#fff",
+      label: base.name,
+      size: 20,
+    }
+  }));
 });
